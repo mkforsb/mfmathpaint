@@ -1,0 +1,12 @@
+html, body {margin:0px; padding:0px; }
+canvas.mfmathpaint { margin:0px; padding:0px; position:absolute; }
+div.mfmathpaint-object-props {
+	position:absolute;
+	border:1px solid black;
+	background:#ccc;
+	font:normal 8pt sans-serif;
+}
+
+div.mfmathpaint-object-props * {
+	font:normal 8pt sans-serif;
+}

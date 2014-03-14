@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="iso-8859-1" />
+		<script type="text/javascript" src="mfmathpaint/thirdparty/jquery/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="mfmathpaint/thirdparty/mathjs/math.js"></script>
+		<script type="text/javascript" src="mfmathpaint/thirdparty/jscolor/jscolor.js"></script>
+		<script type="text/javascript" src="mfmathpaint/main.js"></script>
+		<script type="text/javascript" src="mfmathpaint/object.js"></script>
+		<script type="text/javascript" src="mfmathpaint/button.js"></script>
+		<script type="text/javascript" src="mfmathpaint/painter.js"></script>
+		<script type="text/javascript" src="mfmathpaint/objectmanipulator.js"></script>
+		<script type="text/javascript" src="mfmathpaint/objectpropseditor.js"></script>
+		<script type="text/javascript" src="mfmathpaint/modules/text.js"></script>
+		<script type="text/javascript" src="mfmathpaint/modules/grid.js"></script>
+		<script type="text/javascript" src="mfmathpaint/modules/coordsys.js"></script>
+		<script type="text/javascript" src="mfmathpaint/modules/graph.js"></script>
+		<script type="text/javascript" src="mfmathpaint/modules/unitcircle.js"></script>
+		<script type="text/javascript" src="mfmathpaint/modules/image.js"></script>
+		<!--<script type="text/javascript" src="mfmathpaint/modules/latex.js"></script>-->
+		<script type="text/javascript" src="mfmathpaint/modules/polygon.js"></script>
+		<script type="text/javascript" src="mfmathpaint/modules/geoshapes.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			new mfMathPaint(document.getElementById('mfmathpaint'), 1280, 720, 'mfmathpaint/db.php');
+		});
+		</script>
+		<link rel="stylesheet" type="text/css" href="mfmathpaint/style.css" />
+	</head>
+	<body>
+		<div id="mfmathpaint-wrap" style="position:relative; width:1280px; height:720px;">
+			<div id="mfmathpaint" style="position:absolute; width:1280px; height:720px;"></div>
+		</div>
+	</body>
+</html>
