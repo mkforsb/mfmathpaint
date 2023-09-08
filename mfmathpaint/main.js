@@ -54,7 +54,7 @@ function mfMathPaint(wrapperElement, width, height, dbUrl)
 	this.buttonSource = new mfMathPaint.Button(42, 42, 'Download Source Code');
 	this.buttonSource.AddGraphic('icon', this.iconSource);
 	this.buttonSource.SetActiveGraphic('icon');
-	this.buttonSource.OnClick = function() { location.assign('source.zip'); };
+	this.buttonSource.OnClick = function() { location.assign('https://github.com/mkforsb/mfmathpaint'); };
 	
 	this.AddButton(this.buttonSource);
 	
