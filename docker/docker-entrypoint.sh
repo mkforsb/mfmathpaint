@@ -45,4 +45,6 @@ if [ -f "/etc/mfmathpaint/docker-setup-required" ]; then
 	IFS="$OLDIFS"
 fi
 
+unset MARIADB_HOST MARIADB_USER MARIADB_PASSWORD
+
 exec /usr/local/bin/docker-php-entrypoint apache2-foreground "$@"
