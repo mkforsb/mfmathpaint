@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -f "/etc/mfmathpaint-docker-setup-completed" ]; then
+if [ -f "/etc/mfmathpaint/docker-setup-required" ]; then
 	OLDIFS="$IFS"
 	IFS=
 
@@ -40,7 +40,7 @@ if [ ! -f "/etc/mfmathpaint-docker-setup-completed" ]; then
 
 	echo "$config" > /var/www/html/mfmathpaint/db_config.php
 
-	touch /etc/mfmathpaint-docker-setup-completed
+	rm /etc/mfmathpaint/docker-setup-required
 
 	IFS="$OLDIFS"
 fi
