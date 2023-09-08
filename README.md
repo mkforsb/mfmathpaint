@@ -19,7 +19,7 @@ The [docker](https://github.com/mkforsb/mfmathpaint/tree/master/docker) folder c
 an mfMathPaint image based on [php:8.1-apache-bullseye](https://hub.docker.com/layers/library/php/8.1-apache-bullseye/images/sha256-b1eae7da0f50e4e7e9137348a0f6e8d2229ee3722f8632edfa11dc4a9dbf58de?context=explore), along with a 
 `docker-compose.yml` file to build and run mfMathPaint together with a stock MariaDB container ([mariadb:10.5](https://hub.docker.com/layers/library/mariadb/10.5/images/sha256-aa1ccc18000c32d1f39ac0b055117b27bffd93e622ec961d682de40fe2a1a95f?context=explore))
 
-    $ docker compose -f docker/docker-compose.yml up
+    $ docker compose -f docker/docker-compose.yaml up
 
 Enabling LaTeX
 -
