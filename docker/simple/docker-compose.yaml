@@ -16,8 +16,8 @@ services:
   app:
     image: mfmathpaint-apache
     build:
-      context: ..
-      dockerfile: docker/Dockerfile
+      context: ../..
+      dockerfile: docker/simple/Dockerfile
     environment:
       MARIADB_USER: mfmathpaint
       MARIADB_PASSWORD: password

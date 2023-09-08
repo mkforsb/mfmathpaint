@@ -15,11 +15,15 @@ Installation
 
 Docker
 -
-The [docker](https://github.com/mkforsb/mfmathpaint/tree/master/docker) folder contains a `Dockerfile` to build
-an mfMathPaint image based on [php:8.1-apache-bullseye](https://hub.docker.com/layers/library/php/8.1-apache-bullseye/images/sha256-b1eae7da0f50e4e7e9137348a0f6e8d2229ee3722f8632edfa11dc4a9dbf58de?context=explore), along with a 
-`docker-compose.yaml` file to build and run mfMathPaint together with a stock MariaDB container ([mariadb:10.5](https://hub.docker.com/layers/library/mariadb/10.5/images/sha256-aa1ccc18000c32d1f39ac0b055117b27bffd93e622ec961d682de40fe2a1a95f?context=explore))
+Two Docker setups are provided; `docker/simple` and `docker/with-secrets`. The [docker/simple](https://github.com/mkforsb/mfmathpaint/tree/master/docker/simple) folder contains a `Dockerfile` to build an mfMathPaint image based on [php:8.1-apache-bullseye](https://hub.docker.com/layers/library/php/8.1-apache-bullseye/images/sha256-b1eae7da0f50e4e7e9137348a0f6e8d2229ee3722f8632edfa11dc4a9dbf58de?context=explore), along with a `docker-compose.yaml` file to build and run mfMathPaint together with a stock MariaDB container ([mariadb:10.5](https://hub.docker.com/layers/library/mariadb/10.5/images/sha256-aa1ccc18000c32d1f39ac0b055117b27bffd93e622ec961d682de40fe2a1a95f?context=explore)). The `docker/simple` setup passes the MariaDB username and password as environment variables.
 
-    $ docker compose -f docker/docker-compose.yaml up
+    $ nano docker/simple/docker-compose.yaml # e.g change MARIADB_PASSWORD
+    $ docker compose -f docker/simple/docker-compose.yaml up
+
+The [docker/with-secrets](https://github.com/mkforsb/mfmathpaint/tree/master/docker/with-secrets) setup is identical to the simple setup with the exception that the MariaDB username and password are instead passed as Docker Compose file-based secrets.
+
+    $ echo mypass > docker/with-secrets/mariadb_password.txt
+    $ docker compose -f docker/with-secrets/docker-compose.yaml up
 
 Enabling LaTeX
 -

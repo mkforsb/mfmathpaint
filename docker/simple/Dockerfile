@@ -8,7 +8,7 @@ RUN docker-php-ext-configure pdo_mysql \
     && touch /etc/mfmathpaint/docker-setup-required \
     && chown -R www-data:www-data /etc/mfmathpaint
 
-COPY docker/docker-entrypoint.sh /usr/local/bin/
+COPY docker/simple/docker-entrypoint.sh /usr/local/bin/
 
 COPY --chown=www-data:www-data mfmathpaint /var/www/html/mfmathpaint
 
