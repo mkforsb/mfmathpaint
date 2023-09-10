@@ -1,0 +1,17 @@
+FROM mariadb:10.5
+
+ARG MARIADB_RANDOM_ROOT_PASSWORD=yes
+
+ARG MARIADB_USER_FILE=/run/secrets/mariadb_user
+
+ARG MARIADB_PASSWORD_FILE=/run/secrets/mariadb_password
+
+ARG MARIADB_DATABASE=mfmathpaint
+
+RUN sed -i 's/exec "\$@"/#exec "\$@"/g' /usr/local/bin/docker-entrypoint.sh
+
+RUN --mount=type=secret,id=mariadb_user --mount=type=secret,id=mariadb_password /usr/local/bin/docker-entrypoint.sh mysqld
+
+RUN sed -i 's/#exec "\$@"/exec "\$@"/g' /usr/local/bin/docker-entrypoint.sh
+
+USER mysql

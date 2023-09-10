@@ -2,26 +2,21 @@ version: "3.8"
 
 services:
   db:
-    image: mariadb:10.5
+    image: mfmathpaint-mariadb
     security_opt:
       - "no-new-privileges"
-    cap_add:
-      - SETUID
-      - SETGID
     cap_drop:
       - ALL
-    environment:
-      MARIADB_RANDOM_ROOT_PASSWORD: yes
-      MARIADB_USER_FILE: /run/secrets/mariadb_user
-      MARIADB_PASSWORD_FILE: /run/secrets/mariadb_password
-      MARIADB_DATABASE: mfmathpaint
+    build:
+      context: .
+      dockerfile: Dockerfile.mariadb
+      secrets:
+        - mariadb_user
+        - mariadb_password
     networks:
       - "mfmathpaint"
     expose:
       - "3306"
-    secrets:
-      - mariadb_user
-      - mariadb_password
 
   app:
     image: mfmathpaint-apache
