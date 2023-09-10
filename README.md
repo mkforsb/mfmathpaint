@@ -15,20 +15,28 @@ Installation
 
 Docker
 -
-Three Docker setups are provided. The [docker/simple](https://github.com/mkforsb/mfmathpaint/tree/master/docker/simple) folder contains a `Dockerfile` to build an mfMathPaint image based on [php:8.1-apache-bullseye](https://hub.docker.com/layers/library/php/8.1-apache-bullseye/images/sha256-b1eae7da0f50e4e7e9137348a0f6e8d2229ee3722f8632edfa11dc4a9dbf58de?context=explore), along with a `docker-compose.yaml` file to build and run mfMathPaint together with a stock MariaDB container ([mariadb:10.5](https://hub.docker.com/layers/library/mariadb/10.5/images/sha256-aa1ccc18000c32d1f39ac0b055117b27bffd93e622ec961d682de40fe2a1a95f?context=explore)). The `docker/simple` setup passes the MariaDB username and password as environment variables.
+A number of Docker setups are provided. All of them are based on a composition of [php:8.1-apache-bullseye](https://hub.docker.com/layers/library/php/8.1-apache-bullseye/images/sha256-b1eae7da0f50e4e7e9137348a0f6e8d2229ee3722f8632edfa11dc4a9dbf58de?context=explore) and [mariadb:10.5](https://hub.docker.com/layers/library/mariadb/10.5/images/sha256-aa1ccc18000c32d1f39ac0b055117b27bffd93e622ec961d682de40fe2a1a95f?context=explore).
 
-    $ nano docker/simple/docker-compose.yaml # e.g change MARIADB_PASSWORD
-    $ docker compose -f docker/simple/docker-compose.yaml up
+The `simple` setup(s) will pass database credentials as environment variables defined in the Docker Compose file:
 
-The [docker/with-secrets](https://github.com/mkforsb/mfmathpaint/tree/master/docker/with-secrets) setup is identical to the simple setup with the exception that the MariaDB username and password are instead passed as Docker Compose file-based secrets.
+    # [/with-latex] denotes an optional subdirectory you can include if you want the LaTeX feature available.
 
+    $ nano docker[/with-latex]/simple/docker-compose.yaml # change credentials, e.g MARIADB_USER, MARIADB_PASSWORD
+    $ docker compose -f docker[/with-latex]/simple/docker-compose.yaml up
+
+The `with-secrets` setup(s) will pass database credentials as file-based secrets, using the files in `docker/secrets`:
+
+    $ echo myuser > docker/secrets/mariadb_user.txt
     $ echo mypass > docker/secrets/mariadb_password.txt
-    $ docker compose -f docker/with-secrets/docker-compose.yaml up
+    $ docker compose -f docker[/with-latex]/with-secrets/docker-compose.yaml up
 
-The [docker/nonroot-db-with-secrets](https://github.com/mkforsb/mfmathpaint/tree/master/docker/nonroot-db-with-secrets) setup is identical to the `with-secrets` setup with the exception that the MariaDB database initialization is performed at the build stage rather than at runtime. This allows us to specify a non-root user for the container and removes the need for the `SETUID` and `SETGID` capabilities.
+Finally, the `nonroot-db-with-secrets` setup(s) will use file-based secrets while also performing the MariaDB initialization in the build stage rather than at runtime. This allows us to specify a non-root user for the image and removes the need for the `SETUID` and `SETGID` capabilities.
 
+    $ echo myuser > docker/secrets/mariadb_user.txt
     $ echo mypass > docker/secrets/mariadb_password.txt
-    $ docker compose -f docker/nonroot-db-with-secrets/docker-compose.yaml up
+    $ docker compose -f docker[/with-latex]/nonroot-db-with-secrets/docker-compose.yaml up
+
+For security it is recommended to use one of the `nonroot-db-with-secrets` setups.
 
 Enabling LaTeX
 -
