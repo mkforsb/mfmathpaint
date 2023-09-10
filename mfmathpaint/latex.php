@@ -26,23 +26,26 @@ $illegal = array(
 	'\openin', '\read', '\openout', '\write', '^^');
 
 $input = base64_decode($_GET['latex']);
-$tmpnam = tempnam('/tmp', 'latexphp');
+$tmpnam = "/tmp/latex" . hash("sha256", $input);
 
-if (str_replace($illegal, '', $input) === $input)
+if (!file_exists($tmpnam . '.png'))
 {
-	$texdoc = '\documentclass{article}' . "\n";
-	$texdoc .= '\pagestyle{empty}' . "\n";
-	$texdoc .= '\usepackage{amsmath}' . "\n";
-	$texdoc .= '\begin{document}' . "\n";
-	$texdoc .= '\begin{displaymath}' . "\n";
-	$texdoc .= base64_decode($_GET['latex']) . "\n";
-	$texdoc .= '\end{displaymath}' . "\n";
-	$texdoc .= '\end{document}' . "\n";
+	if (str_replace($illegal, '', $input) === $input)
+	{
+		$texdoc = '\documentclass{article}' . "\n";
+		$texdoc .= '\pagestyle{empty}' . "\n";
+		$texdoc .= '\usepackage{amsmath}' . "\n";
+		$texdoc .= '\begin{document}' . "\n";
+		$texdoc .= '\begin{displaymath}' . "\n";
+		$texdoc .= base64_decode($_GET['latex']) . "\n";
+		$texdoc .= '\end{displaymath}' . "\n";
+		$texdoc .= '\end{document}' . "\n";
 
-	file_put_contents($tmpnam . '.tex', $texdoc);
+		file_put_contents($tmpnam . '.tex', $texdoc);
 
-	exec('latex -output-format=dvi -output-directory=/tmp ' . $tmpnam . '.tex');
-	exec('dvipng -bg Transparent -T tight -D 200 -o ' . $tmpnam . '.png ' . $tmpnam . '.dvi');
+		exec('latex -output-format=dvi -output-directory=/tmp ' . $tmpnam . '.tex');
+		exec('dvipng -bg Transparent -T tight -D 200 -o ' . $tmpnam . '.png ' . $tmpnam . '.dvi');
+	}
 }
 
 header('Content-Type: image/png');
