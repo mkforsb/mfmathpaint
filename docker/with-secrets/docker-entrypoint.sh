@@ -32,6 +32,7 @@ if [ -f "/etc/mfmathpaint/docker-setup-required" ]; then
 
 	echo "$script" > /tmp/setup.php
 	php /tmp/setup.php
+	rm /tmp/setup.php
 
 	read -r -d '' config <<-EOCONFIG
 		<?php
