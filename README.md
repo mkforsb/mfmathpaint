@@ -13,6 +13,14 @@ Installation
     /mfmathpaint$ cd ..
 	$ cp index.html-dist index.html
 
+Enabling LaTeX
+-
+For Debian/Ubuntu and derivatives:
+
+    $ apt-get install texlive-latex-base dvipng
+
+Then edit your index.html to load `mfmathpaint/modules/latex.js`
+
 Docker
 -
 A number of Docker setups are provided. All of them are based on a composition of [php:8.1-apache-bullseye](https://hub.docker.com/layers/library/php/8.1-apache-bullseye/images/sha256-b1eae7da0f50e4e7e9137348a0f6e8d2229ee3722f8632edfa11dc4a9dbf58de?context=explore) and [mariadb:10.5](https://hub.docker.com/layers/library/mariadb/10.5/images/sha256-aa1ccc18000c32d1f39ac0b055117b27bffd93e622ec961d682de40fe2a1a95f?context=explore).
@@ -37,14 +45,6 @@ Finally, the `nonroot-db-with-secrets` setup(s) will use file-based secrets whil
     $ docker compose -f docker[/with-latex]/nonroot-db-with-secrets/docker-compose.yaml up
 
 For security it is recommended to use one of the `nonroot-db-with-secrets` setups.
-
-Enabling LaTeX
--
-For Debian/Ubuntu and derivatives:
-
-    $ apt-get install texlive-latex-base dvipng
-
-Then edit your index.html to load `mfmathpaint/modules/latex.js`
 
 License
 -
